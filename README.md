@@ -5,8 +5,9 @@ This is a small modification that makes gameplay of [Bloomtown: A Different Stor
 [Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
 
 ## Installation:
-- Unpack [BepInEx_win_x64_5.4.23.2.zip](https://github.com/BepInEx/BepInEx/releases/download/v5.4.23.2/BepInEx_win_x64_5.4.23.2.zip) into the game folder.
-- Unpack the [mod](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2023.07.28/Memoria.Bloomtown.Steam_GOG_v2023.07.28.zip) archive into the game folder.
+
+- Unpack [Unstripped_2022.3.30_BepInEx_win_x64_5.4.23.2.zip](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2024.10.01/Unstripped_2022.3.30_BepInEx_win_x64_5.4.23.2.zip) into the game folder.
+- Unpack the [mod](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2024.10.01/Memoria.Bloomtown.Steam_v2024.10.01.zip) archive into the game folder.
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -31,4 +32,5 @@ If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memor
 - Create an issue.
 
 ## Screenshots:
-
+![Settings](https://github.com/user-attachments/assets/b448e13b-e6ca-4ead-a31a-e8ac86dc1c35)
+![Quick Saves](https://github.com/user-attachments/assets/70ac27ee-46df-4ba0-b592-f51ce1ab2e13)
