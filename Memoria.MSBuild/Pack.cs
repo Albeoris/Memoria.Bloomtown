@@ -56,6 +56,9 @@ public sealed class Pack : ITask
 
     private Boolean IsNotCurrentConfigurationFile(String fileName)
     {
+        if (fileName.StartsWith("System."))
+            return true;
+        
         return fileName.StartsWith("Memoria.") && !fileName.EndsWith($"{Configuration}.dll");
     }
 

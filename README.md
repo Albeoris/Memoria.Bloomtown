@@ -18,16 +18,17 @@ If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memor
 
 ## Features:
 - You can [increase game speed](https://github.com/Albeoris/Memoria.Bloomtown/wiki/Features-Speed.cfg) (Default Key: F1).
+- Quick save (F5), quick load (F9) and save on exit
 
 ## Configuration:
 1. Start the game first.
 2. Features that are enabled by default (for example, increasing the speed of the game) will already work.
-3. Close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.Bloomtown\$Section$.cfg`
+3. Check the bottom of in-game Settings menu, a lot of configs is available here
+4. To change other, you have to close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.Bloomtown\$Section$.cfg`
    
 ## Troubleshooting:
 - Share mod logs: $GameFolder$\BepInEx\LogOutput.log
 - Create an issue.
 
 ## Screenshots:
-![DisplayAttackRangeWithMovement](https://github.com/Albeoris/Memoria.Bloomtown/assets/4787832/8e792cb0-b67c-4c2f-aa9f-d615103258c1)
-![DisplayAttackRangeOnCell](https://github.com/Albeoris/Memoria.Bloomtown/assets/4787832/47a648d7-9361-4366-9980-42e238d6b7fd)
+
