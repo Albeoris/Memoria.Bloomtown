@@ -1,0 +1,9 @@
+<Project>
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <GenerateDependencyFile>false</GenerateDependencyFile>
+    </PropertyGroup>
+
+</Project>
