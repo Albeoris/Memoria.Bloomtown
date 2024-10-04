@@ -19,6 +19,10 @@ public abstract partial class SpeedConfiguration
     [ConfigEntry($"Speed up hold factor." +
                  "$[Russian]: Коэффициент ускорения при удержании.")]
     public virtual Single HoldFactor { get; set; } = 5.0f;
+    
+    [ConfigEntry($"Always sprint by default." +
+                 "$[Russian]: Всегда бегать по умолчанию.")]
+    public virtual Boolean AlwaysSprint { get; set; } = false;
 
     public abstract void CopyFrom(SpeedConfiguration configuration);
     public abstract void OverrideFrom(SpeedConfiguration configuration);

@@ -6,6 +6,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memoria.CodeGenerator", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memoria.MSBuild", "Memoria.MSBuild\Memoria.MSBuild.csproj", "{BFAE02E1-D9DD-413A-A3D1-D0A6F2B82B9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{58E5ED2B-3D70-4A3C-9448-93602824F1E3}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		MSBuild|Any CPU = MSBuild|Any CPU

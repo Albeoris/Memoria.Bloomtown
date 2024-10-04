@@ -67,12 +67,12 @@ public static class SystemPanel_SetContentButtons
                 });
             }
             
-            // {
-            //     const string localizationKey = "Memoria.Assets.SkipLogoOnStartup";
-            //     LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Skip startup logo");
-            //     CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
-            //     setupToggle(toggle, localizationKey, config.Assets.SkipLogoOnStartup, value => config.Assets.SkipLogoOnStartup = value);
-            // }
+            {
+                const string localizationKey = "Memoria.Speed.AlwaysSprint";
+                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Always sprint");
+                CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
+                setupToggle(toggle, localizationKey, config.Speed.AlwaysSprint, value => config.Speed.AlwaysSprint = value);
+            }
 
             {
                 IReadOnlyList<Hotkey> keys = config.Speed.Key.GroupedByHeld.FirstOrDefault() ?? [];

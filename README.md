@@ -10,7 +10,7 @@ This is a small modification that makes gameplay of [Bloomtown: A Different Stor
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
-If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memoria.FFPR/wiki/Steam-Deck).
+If you are playing on Steam Deck check [this page](https://github.com/Albeoris/Memoria.FFPR/wiki/Steam-Deck).
 
 ## Deinstalation:
 - To remove the mod - delete $GameFolder$\BepInEx\plugins\Memoria.Bloomtown.*.dll
@@ -18,6 +18,7 @@ If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memor
 
 ## Features:
 - You can [increase game speed](https://github.com/Albeoris/Memoria.Bloomtown/wiki/Features-Speed.cfg) (Default Key: F1).
+- You can turn on Sprint by default
 - Quick save (F5), quick load (F9) and save on exit
 
 ## Configuration:
