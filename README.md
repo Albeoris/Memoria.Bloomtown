@@ -20,6 +20,7 @@ If you are playing on Steam Deck check [this page](https://github.com/Albeoris/M
 ## Features:
 - You can [increase game speed](https://github.com/Albeoris/Memoria.Bloomtown/wiki/Features-Speed.cfg) (Default Key: F1).
 - You can turn on Sprint by default
+- Keyboard and Gamepad binding configuration
 - Quick save (F5), quick load (F9) and save on exit
 
 ## Configuration:
