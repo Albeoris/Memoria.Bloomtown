@@ -7,7 +7,7 @@ This is a small modification that makes gameplay of [Bloomtown: A Different Stor
 ## Installation:
 
 - Unpack [Unstripped_2022.3.30_BepInEx_win_x64_5.4.23.2.zip](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2024.10.01/Unstripped_2022.3.30_BepInEx_win_x64_5.4.23.2.zip) into the game folder.
-- Unpack the [mod](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2024.10.01/Memoria.Bloomtown.Steam_v2024.10.01.zip) archive into the game folder.
+- Unpack the [mod](https://github.com/Albeoris/Memoria.Bloomtown/releases/download/v2024.10.06/Memoria.Bloomtown.Steam_v2024.10.06.zip) archive into the game folder.
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
