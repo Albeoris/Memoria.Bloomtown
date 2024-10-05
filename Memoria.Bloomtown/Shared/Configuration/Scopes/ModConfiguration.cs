@@ -9,7 +9,7 @@ public sealed partial class ModConfiguration
     public SavesConfiguration Saves { get; }
     public AssetsConfiguration Assets { get; }
 
-    private readonly ConfigFileProvider _provider = new();
+    public ConfigFileProvider Provider { get; } = new();
 
     public ModConfiguration()
     {
@@ -19,9 +19,9 @@ public sealed partial class ModConfiguration
             {
                 log.LogInfo($"Initializing {nameof(ModConfiguration)}");
 
-                Speed = SpeedConfiguration.Create(_provider);
-                Saves = SavesConfiguration.Create(_provider);
-                Assets = AssetsConfiguration.Create(_provider);
+                Speed = SpeedConfiguration.Create(Provider);
+                Saves = SavesConfiguration.Create(Provider);
+                Assets = AssetsConfiguration.Create(Provider);
 
                 log.LogInfo($"{nameof(ModConfiguration)} initialized successfully.");
             }
@@ -54,7 +54,7 @@ public sealed partial class ModConfiguration
                 try
                 {
                     ConfigFileProvider provider = new(configDirectory, saveChangedConfigFiles: false);
-                    _provider.SaveChangedConfigFiles = false;
+                    Provider.SaveChangedConfigFiles = false;
 
                     Speed.OverrideFrom(SpeedConfiguration.Create(provider));
                     Saves.OverrideFrom(SavesConfiguration.Create(provider));
@@ -66,7 +66,7 @@ public sealed partial class ModConfiguration
                 }
                 finally
                 {
-                    _provider.SaveChangedConfigFiles = true;
+                    Provider.SaveChangedConfigFiles = true;
                 }
             }
         }

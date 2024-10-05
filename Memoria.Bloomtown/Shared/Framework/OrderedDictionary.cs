@@ -19,6 +19,8 @@ public sealed class OrderedDictionary<TKey, TValue> : IEnumerable<(TKey key, TVa
         _set = new Dictionary<TKey, (Int32 index, TValue value)>(comparer);
         _list = new List<(TKey key, TValue value)>();
     }
+    
+    public TValue this[TKey key] => _set.TryGetValue(key, out var value) ? value.value : throw new KeyNotFoundException(key.ToString());
 
     public void AddOrUpdate(TKey key, TValue value)
     {
@@ -68,6 +70,18 @@ public sealed class OrderedDictionary<TKey, TValue> : IEnumerable<(TKey key, TVa
     public Boolean ContainsKey(TKey key)
     {
         return _set.ContainsKey(key);
+    }
+    
+    public Boolean TryGetValue(TKey key, out TValue value)
+    {
+        if (_set.TryGetValue(key, out var node))
+        {
+            value = node.value;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 
     public IEnumerator<(TKey key, TValue value)> GetEnumerator()

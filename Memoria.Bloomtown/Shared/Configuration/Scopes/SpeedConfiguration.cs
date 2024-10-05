@@ -1,6 +1,9 @@
 ﻿using System;
+using LazyBearTechnology;
 using Memoria.Bloomtown.Configuration.Hotkey;
 using UnityEngine;
+
+// ReSharper disable RedundantNameQualifier // for code generator
 
 namespace Memoria.Bloomtown.Configuration;
 
@@ -10,7 +13,11 @@ public abstract partial class SpeedConfiguration
     [ConfigEntry($"Speed up key." +
                  "$[Russian]: Кнопка для включения ускорения.")]
     [ConfigConverter(nameof(KeyConverter))]
-    public virtual HotkeyGroup Key { get; } = HotkeyGroup.Create(new[] { new Hotkey.Hotkey(KeyCode.F1), new Hotkey.Hotkey(KeyCode.F1) { MustHeld = true } });
+    public virtual HotkeyGroup Key { get; } = HotkeyGroup.Create([
+        new Hotkey.Hotkey(KeyCode.F1),
+        new Hotkey.Hotkey(KeyCode.F1) { MustHeld = true },
+        new Hotkey.Hotkey(LazyBearTechnology.GamepadButton.RT) { ModifierButtons = [LazyBearTechnology.GamepadButton.LT] }
+    ]);
 
     [ConfigEntry($"Speed up toggle factor." +
                  "$[Russian]: Коэффициент ускорения при включении.")]

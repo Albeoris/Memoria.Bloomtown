@@ -144,6 +144,10 @@
                 <HintPath>$(FrameworkPathOverride)\FMODUnity.dll</HintPath>
                 <Private>False</Private>
             </Reference>
+            <Reference Include="Rewired_Core">
+                <HintPath>$(FrameworkPathOverride)\Rewired_Core.dll</HintPath>
+                <Private>False</Private>
+            </Reference>
         </ItemGroup>
 
         <ItemGroup>
