@@ -22,6 +22,7 @@ If you are playing on Steam Deck check [this page](https://github.com/Albeoris/M
 - You can turn on Sprint by default
 - You can change enemy HP visibility (show always or hide always)
 - Quick save (F5), quick load (F9) and save on exit
+- Highlighting new items in inventory
 - Keyboard and Gamepad binding configuration; run the game to create configs, edit them and run game again
   - \Bloomtown\BepInEx\config\Memoria.Bloomtown\KeyboardBindings.cfg
   - \Bloomtown\BepInEx\config\Memoria.Bloomtown\GamepadBindings.cfg
