@@ -73,6 +73,18 @@ public static class SystemPanel_SetContentButtons
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Speed.AlwaysSprint, value => config.Speed.AlwaysSprint = value);
             }
+            
+            {
+                const string localizationKey = "Memoria.Battle.EnemyHeartVisibility";
+                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Enemy HP visibility");
+                CustomDropdown dropdown = UIManager.AddChildInstance(prefabDropdown, __instance.buttons.content, prefabDropdown.name);
+                setupDropdown(dropdown, localizationKey);
+                
+                EnemyHeartVisibility[] values = EnumCache<EnemyHeartVisibility>.Values;
+                dropdown.SetOptions(["Default", "Show Always", "Hide Always"]);
+                dropdown.SetValueWithoutNotify(config.Battle.EnemyHeartVisibility - EnemyHeartVisibility.Default);
+                dropdown.SetOnValueChanged(index => { config.Battle.EnemyHeartVisibility = values[index]; });
+            }
 
             {
                 IReadOnlyList<Hotkey> keys = config.Speed.Key.GroupedByHeld.FirstOrDefault() ?? [];

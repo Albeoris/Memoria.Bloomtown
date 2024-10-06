@@ -8,6 +8,7 @@ public sealed partial class ModConfiguration
     public SpeedConfiguration Speed { get; }
     public SavesConfiguration Saves { get; }
     public AssetsConfiguration Assets { get; }
+    public BattleConfiguration Battle { get; }
 
     public ConfigFileProvider Provider { get; } = new();
 
@@ -22,6 +23,7 @@ public sealed partial class ModConfiguration
                 Speed = SpeedConfiguration.Create(Provider);
                 Saves = SavesConfiguration.Create(Provider);
                 Assets = AssetsConfiguration.Create(Provider);
+                Battle = BattleConfiguration.Create(Provider);
 
                 log.LogInfo($"{nameof(ModConfiguration)} initialized successfully.");
             }
@@ -59,6 +61,7 @@ public sealed partial class ModConfiguration
                     Speed.OverrideFrom(SpeedConfiguration.Create(provider));
                     Saves.OverrideFrom(SavesConfiguration.Create(provider));
                     Assets.OverrideFrom(AssetsConfiguration.Create(provider));
+                    Battle.OverrideFrom(BattleConfiguration.Create(provider));
                 }
                 catch (Exception ex)
                 {
