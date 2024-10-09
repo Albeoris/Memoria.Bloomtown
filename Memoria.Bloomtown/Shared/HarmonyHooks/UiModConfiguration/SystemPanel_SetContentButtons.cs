@@ -9,6 +9,8 @@ using Memoria.Bloomtown.Configuration.Hotkey;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Object = System.Object;
+
 
 [HarmonyPatch(typeof(SystemPanel), "SetContentButtons")]
 public static class SystemPanel_SetContentButtons
@@ -19,6 +21,8 @@ public static class SystemPanel_SetContentButtons
         {
             if (___m_state != SystemPanel.State.Settings)
                 return;
+
+            List<Selectable> selectables = UIManager_SetButtonsNavUpDown.LastAssignedSelectables;
             
             CustomDropdown prefabDropdown = __instance.buttons.content.Find("Dropdown").GetComponent<CustomDropdown>();
             SetupDropdownDelegate setupDropdown = AccessTools.MethodDelegate<SetupDropdownDelegate>(AccessTools.Method(typeof(SystemPanel), "SetupDropdown"), __instance);
@@ -39,6 +43,8 @@ public static class SystemPanel_SetContentButtons
                 setupDropdown(dropdown, localizationKey);
                 dropdown.SetOptions(["Memoria"]);
                 dropdown.SetValueWithoutNotify(0);
+                selectables.Add(dropdown);
+                dropdown.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
 
             {
@@ -46,6 +52,8 @@ public static class SystemPanel_SetContentButtons
                 LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Save Game on Exit");
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Saves.AutoSaveOnExit, (value) => config.Saves.AutoSaveOnExit = value);
+                selectables.Add(toggle);
+                toggle.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
             
             {
@@ -53,6 +61,8 @@ public static class SystemPanel_SetContentButtons
                 LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Delete Exit Save on Load");
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Saves.DeleteExitSaveOnLoad, value => config.Saves.DeleteExitSaveOnLoad = value);
+                selectables.Add(toggle);
+                toggle.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
 
             {
@@ -65,6 +75,8 @@ public static class SystemPanel_SetContentButtons
                     Int32 integerValue = Mathf.RoundToInt(floatValue * 20f);
                     config.Saves.QuickSavesCount = integerValue;
                 });
+                selectables.Add(slider);
+                slider.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
             
             {
@@ -72,6 +84,8 @@ public static class SystemPanel_SetContentButtons
                 LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Always sprint");
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Speed.AlwaysSprint, value => config.Speed.AlwaysSprint = value);
+                selectables.Add(toggle);
+                toggle.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
             
             {
@@ -84,6 +98,8 @@ public static class SystemPanel_SetContentButtons
                 dropdown.SetOptions(["Default", "Show Always", "Hide Always"]);
                 dropdown.SetValueWithoutNotify(config.Battle.EnemyHeartVisibility - EnemyHeartVisibility.Default);
                 dropdown.SetOnValueChanged(index => { config.Battle.EnemyHeartVisibility = values[index]; });
+                selectables.Add(dropdown);
+                dropdown.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
             }
 
             {
@@ -102,6 +118,8 @@ public static class SystemPanel_SetContentButtons
                             Single floatValue = slider.value / 20f;
                             config.Speed.HoldFactor = floatValue * 10f;
                         });
+                        selectables.Add(slider);
+                        slider.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
                     }
                     else
                     {
@@ -113,8 +131,14 @@ public static class SystemPanel_SetContentButtons
                             Single floatValue = slider.value / 20f;
                             config.Speed.ToggleFactor = floatValue * 10f;
                         });
+                        selectables.Add(slider);
+                        slider.gameObject.transform.SetSiblingIndex(100500+selectables.Count);
                     }
                 }
+                
+                UIManager.SetButtonsNavUpDown(selectables);
+                selectables[0].Select();
+                UIManager_SetButtonsNavUpDown.LastAssignedSelectables = [];
             }
         }
         catch (Exception ex)
