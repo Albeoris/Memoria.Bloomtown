@@ -39,22 +39,22 @@ public sealed class GameSaveControl : SafeComponent
             }
         }
         
-        // Quick load last save
-        foreach (Hotkey key in config.QuickLoadKey.Keys)
-        {
-            if (InputManager.IsToggled(key))
-            {
-                QuickLoadLast();
-                return;
-            }
-        }
-
         // Quick load exact quick saved game
         foreach (Hotkey key in config.QuickLoadExactKey.Keys)
         {
             if (InputManager.IsToggled(key))
             {
                 QuickLoadExact();
+                return;
+            }
+        }
+        
+        // Quick load last save
+        foreach (Hotkey key in config.QuickLoadKey.Keys)
+        {
+            if (InputManager.IsToggled(key))
+            {
+                QuickLoadLast();
                 return;
             }
         }
@@ -67,11 +67,17 @@ public sealed class GameSaveControl : SafeComponent
 
     private static void QuickSave()
     {
-        if (!CanSaveNow(onExit: false))
-            return;
-        
         if (MaxQuickSavesCount < 1)
             return;
+        
+        if (!IsSaveLoadInteractable(onExit: false))
+            return;
+
+        if (IsSavesBlocked(out String saveBlocked))
+        {
+            PopUpMessage.ShowMessage(saveBlocked);
+            return;
+        }
         
         SaveManager.SaveDataInfo saveDataInfo = SaveGame($"{QuickSavePrefix}{_nextQuickSaveNumber:D4}");
         _nextQuickSaveNumber = (_nextQuickSaveNumber + 1) % MaxQuickSavesCount;
@@ -80,7 +86,7 @@ public sealed class GameSaveControl : SafeComponent
 
     private static void QuickLoadLast()
     {
-        if (!CanSaveNow(onExit: false))
+        if (!IsSaveLoadInteractable(onExit: false))
             return;
         
         SaveManager.SaveDataInfo lastSave = FindLastSave();
@@ -97,7 +103,7 @@ public sealed class GameSaveControl : SafeComponent
     
     private static void QuickLoadExact()
     {
-        if (!CanSaveNow(onExit: false))
+        if (!IsSaveLoadInteractable(onExit: false))
             return;
         
         if (TryLoadGame(QuickSavePrefix, out SaveManager.SaveDataInfo saveDataInfo))
@@ -112,8 +118,14 @@ public sealed class GameSaveControl : SafeComponent
         if (!saveOnExit)
             return;
 
-        if (!CanSaveNow(onExit: true))
+        if (!IsSaveLoadInteractable(onExit: true))
             return;
+        
+        if (IsSavesBlocked(out String saveBlocked))
+        {
+            ModComponent.Log.LogWarning($"Cannot save game on exit: {saveBlocked}");
+            return;
+        }
 
         ModComponent.Log.LogInfo("Saving game on exit...");
         SaveManager.SaveDataInfo saveDataInfo = SaveGame(SaveOnExitName);
@@ -148,7 +160,7 @@ public sealed class GameSaveControl : SafeComponent
         return SaveManager.GetSaves().FirstOrDefault(x => x.fileName == saveName);
     }
 
-    private static Boolean CanSaveNow(Boolean onExit)
+    internal static Boolean IsSaveLoadInteractable(Boolean onExit)
     {
         if (SceneReferences.instance?.locationName is null)
             return false;
@@ -177,6 +189,20 @@ public sealed class GameSaveControl : SafeComponent
             return false;
 
         return true;
+    }
+
+    internal static Boolean IsSavesBlocked(out String reason)
+    {
+        if (!ModComponent.Instance.Config.Saves.AllowSavingWhenFastTravelBlocked && PlayerData.IsFastTravelBlocked(out String blockedName))
+        {
+            const String localizationKey = "Memoria.Saves.GameSavesDisabledMessage";
+            LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Game saves are disabled:");
+            reason = LocalizationManager.L(localizationKey) + "\n" + LocalizationManager.L(blockedName);
+            return true;
+        }
+
+        reason = null;
+        return false;
     }
 
     private static SaveManager.SaveDataInfo SaveGame(String saveName)

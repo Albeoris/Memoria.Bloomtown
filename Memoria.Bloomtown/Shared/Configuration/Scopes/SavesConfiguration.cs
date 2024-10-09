@@ -33,6 +33,10 @@ public abstract partial class SavesConfiguration
     [ConfigEntry($"Delete the exit save on game load." +
                  "$[Russian]: Удалить автоматическое сохранение после загрузки.")]
     public virtual Boolean DeleteExitSaveOnLoad { get; set; } = true;
+    
+    [ConfigEntry($"Allow saving when fast travel is blocked. WARNING: This may break your gameplay!" +
+                 "$[Russian]: Разрешает сохранение при заблокированном быстром перемещении. ВНИМАНИЕ: Это может сломать вам игру!")]
+    public virtual Boolean AllowSavingWhenFastTravelBlocked { get; set; } = false;
 
     public abstract void CopyFrom(SavesConfiguration configuration);
     public abstract void OverrideFrom(SavesConfiguration configuration);

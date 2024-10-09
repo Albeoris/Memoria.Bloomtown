@@ -9,7 +9,7 @@
     <PropertyGroup>
         <ProjectGuid>{81953FA5-C096-4738-850F-ADB54A5D5A9B}</ProjectGuid>
         <RootNamespace>Memoria.Bloomtown</RootNamespace>
-        <TargetFramework>net471</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>disable</Nullable>
     </PropertyGroup>
