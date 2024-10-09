@@ -6,6 +6,7 @@ using Memoria.Bloomtown;
 using Memoria.Bloomtown.BeepInEx;
 using Memoria.Bloomtown.Configuration;
 using Memoria.Bloomtown.Configuration.Hotkey;
+using Memoria.Bloomtown.Shared.Core;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -37,8 +38,10 @@ public static class SystemPanel_SetContentButtons
 
             // Just separator
             {
-                const string localizationKey = "Memoria.ModConfiguration";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Mod Configuration");
+                String localizationKey = LocalizationInjector.AddLocalization("ModConfiguration", 
+                    english: "Mod Configuration",
+                    russian: "Настройки мода");
+                
                 CustomDropdown dropdown = UIManager.AddChildInstance(prefabDropdown, __instance.buttons.content, prefabDropdown.name);
                 setupDropdown(dropdown, localizationKey);
                 dropdown.SetOptions(["Memoria"]);
@@ -48,8 +51,10 @@ public static class SystemPanel_SetContentButtons
             }
 
             {
-                const string localizationKey = "Memoria.Saves.AutoSaveOnExit";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Save Game on Exit");
+                String localizationKey = LocalizationInjector.AddLocalization("Saves.AutoSaveOnExit", 
+                    english: "Save Game on Exit",
+                    russian: "Сохранять игру при выходе");
+                
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Saves.AutoSaveOnExit, (value) => config.Saves.AutoSaveOnExit = value);
                 selectables.Add(toggle);
@@ -57,8 +62,10 @@ public static class SystemPanel_SetContentButtons
             }
             
             {
-                const string localizationKey = "Memoria.Saves.DeleteExitSaveOnLoad";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Delete Exit Save on Load");
+                String localizationKey = LocalizationInjector.AddLocalization("Saves.DeleteExitSaveOnLoad", 
+                    english: "Delete Exit Save on Load",
+                    russian: "Удалять сохранение выхода после загрузки");
+                
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Saves.DeleteExitSaveOnLoad, value => config.Saves.DeleteExitSaveOnLoad = value);
                 selectables.Add(toggle);
@@ -66,8 +73,10 @@ public static class SystemPanel_SetContentButtons
             }
 
             {
-                const string localizationKey = "Memoria.Saves.QuickSavesCount";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Quick Saves Count");
+                String localizationKey = LocalizationInjector.AddLocalization("Saves.QuickSavesCount", 
+                    english: "Quick Saves Count",
+                    russian: "Количество быстрых сохранений");
+                
                 Slider slider = UIManager.AddChildInstance(prefabSlider, __instance.buttons.content, prefabSlider.name);
                 setupSlider(slider, localizationKey, config.Saves.QuickSavesCount / 20f, delegate
                 {
@@ -80,8 +89,10 @@ public static class SystemPanel_SetContentButtons
             }
             
             {
-                const string localizationKey = "Memoria.Speed.AlwaysSprint";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Always sprint");
+                String localizationKey = LocalizationInjector.AddLocalization("Speed.AlwaysSprint", 
+                    english: "Always sprint",
+                    russian: "Всегда бежать");
+                
                 CustomToggle toggle = UIManager.AddChildInstance(prefabToggle, __instance.buttons.content, prefabSlider.name);
                 setupToggle(toggle, localizationKey, config.Speed.AlwaysSprint, value => config.Speed.AlwaysSprint = value);
                 selectables.Add(toggle);
@@ -89,13 +100,27 @@ public static class SystemPanel_SetContentButtons
             }
             
             {
-                const string localizationKey = "Memoria.Battle.EnemyHeartVisibility";
-                LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Enemy HP visibility");
+                String localizationKey = LocalizationInjector.AddLocalization("Battle.EnemyHeartVisibility", 
+                    english: "Enemy HP visibility",
+                    russian: "Отображение ОЗ врагов");
+
+                String optionDefault = LocalizationInjector.Localize(
+                    english: "Default",
+                    russian: "По умолчанию");
+                
+                String optionShowAlways = LocalizationInjector.Localize(
+                    english: "Show Always",
+                    russian: "Показывать всегда");
+                
+                String optionHideAlways = LocalizationInjector.Localize(
+                    english: "Hide Always",
+                    russian: "Скрывать всегда");
+                
                 CustomDropdown dropdown = UIManager.AddChildInstance(prefabDropdown, __instance.buttons.content, prefabDropdown.name);
                 setupDropdown(dropdown, localizationKey);
                 
                 EnemyHeartVisibility[] values = EnumCache<EnemyHeartVisibility>.Values;
-                dropdown.SetOptions(["Default", "Show Always", "Hide Always"]);
+                dropdown.SetOptions([optionDefault, optionShowAlways, optionHideAlways]);
                 dropdown.SetValueWithoutNotify(config.Battle.EnemyHeartVisibility - EnemyHeartVisibility.Default);
                 dropdown.SetOnValueChanged(index => { config.Battle.EnemyHeartVisibility = values[index]; });
                 selectables.Add(dropdown);
@@ -110,8 +135,10 @@ public static class SystemPanel_SetContentButtons
                     
                     if (key.MustHeld)
                     {
-                        const string localizationKey = "Memoria.Speed.HoldFactor";
-                        LocalizationManager.cur_lng.dict.TryAdd(localizationKey, $"Speed up hold factor\r\nKey: {keyHint}");
+                        String localizationKey = LocalizationInjector.AddLocalization("Speed.HoldFactor", 
+                            english: $"Speed up hold factor\r\nKey: {keyHint}",
+                            russian: $"Ускорение при удержании\r\nКнопка: {keyHint}");
+                        
                         Slider slider = UIManager.AddChildInstance(prefabSlider, __instance.buttons.content, prefabSlider.name);
                         setupSlider(slider, localizationKey, config.Speed.HoldFactor / 10f, delegate
                         {
@@ -123,8 +150,10 @@ public static class SystemPanel_SetContentButtons
                     }
                     else
                     {
-                        const string localizationKey = "Memoria.Speed.ToggleFactor";
-                        LocalizationManager.cur_lng.dict.TryAdd(localizationKey, $"Speed up toggle factor\r\nKey: {keyHint}");
+                        String localizationKey = LocalizationInjector.AddLocalization("Speed.ToggleFactor", 
+                            english: $"Speed up toggle factor\r\nKey: {keyHint}",
+                            russian: $"Ускорение при включении\r\nКнопка: {keyHint}");
+                        
                         Slider slider = UIManager.AddChildInstance(prefabSlider, __instance.buttons.content, prefabSlider.name);
                         setupSlider(slider, localizationKey, config.Speed.ToggleFactor / 10f, delegate
                         {

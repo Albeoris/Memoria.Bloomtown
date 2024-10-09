@@ -7,6 +7,7 @@ using HarmonyLib;
 using LazyBearTechnology;
 using Memoria.Bloomtown.Configuration;
 using Memoria.Bloomtown.Configuration.Hotkey;
+using Memoria.Bloomtown.Shared.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -195,9 +196,11 @@ public sealed class GameSaveControl : SafeComponent
     {
         if (!ModComponent.Instance.Config.Saves.AllowSavingWhenFastTravelBlocked && PlayerData.IsFastTravelBlocked(out String blockedName))
         {
-            const String localizationKey = "Memoria.Saves.GameSavesDisabledMessage";
-            LocalizationManager.cur_lng.dict.TryAdd(localizationKey, "Game saves are disabled:");
-            reason = LocalizationManager.L(localizationKey) + "\n" + LocalizationManager.L(blockedName);
+            String text = LocalizationInjector.Localize( 
+                english: $"Saving the game is disabled:",
+                russian: $"Сохранение игры запрещено:");
+            
+            reason = text + "\n" + LocalizationManager.L(blockedName);
             return true;
         }
 
